@@ -877,7 +877,7 @@
 
     function loadKangaroo() {
         var request = new XMLHttpRequest();
-        request.open("GET", "https://raw.githubusercontent.com/BenTsai85/ComputerGraphics/master/HW1/JSON_Format/Kangaroo.json");
+        request.open("GET", "https://raw.githubusercontent.com/BenTsai85/ComputerGraphics/master/HW1/Kangaroo.json");
         request.onreadystatechange = function () {
             if (request.readyState == 4) {
                 handleLoadedKangaroo(JSON.parse(request.responseText));
