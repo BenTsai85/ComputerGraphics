@@ -918,7 +918,7 @@
         if (document.getElementById("interactive").checked) {
             mat4.translate(mvMatrix, [ interactive_x, interactive_y, interactive_z ]);
             mat4.scale(mvMatrix, [ interactive_size, interactive_size, interactive_size ]);
-
+            mat4.multiply(mvMatrix, [ 1, interactive_torsion, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ]);
         }
         else {
             mat4.rotate(mvMatrix, -degToRad(turn), [0, 1, 0]);
@@ -1203,6 +1203,7 @@
     var interactive_y = 0;
     var interactive_z = 0;
     var interactive_size = 1;
+    var interactive_torsion = 0;
     function tick() {
         requestAnimFrame(tick);
         handleKeys();
@@ -1284,15 +1285,27 @@
             }
         }
         if (currentlyPressedKeys[49]) {
-            // PageUp cursor key
+            // 1
             if (document.getElementById("interactive").checked) {
                 interactive_size += 0.1;
             }
         }
         if (currentlyPressedKeys[50]) {
-            // PageDown cursor key
+            // 2
             if (document.getElementById("interactive").checked) {
                 interactive_size -= 0.1;
+            }
+        }
+        if (currentlyPressedKeys[51]) {
+            // 3
+            if (document.getElementById("interactive").checked) {
+                interactive_torsion += 0.1;
+            }
+        }
+        if (currentlyPressedKeys[52]) {
+            // 4
+            if (document.getElementById("interactive").checked) {
+                interactive_torsion -= 0.1;
             }
         }
     }
@@ -1301,6 +1314,8 @@
         interactive_x = 0;
         interactive_y = 0;
         interactive_z = 0;
+        interactive_size = 1;
+        interactive_torsion = 0;
     }
 
     function webGLStart() {
