@@ -917,6 +917,8 @@
 
         if (document.getElementById("interactive").checked) {
             mat4.translate(mvMatrix, [ interactive_x, interactive_y, interactive_z ]);
+            mat4.scale(mvMatrix, [ interactive_size, interactive_size, interactive_size ]);
+
         }
         else {
             mat4.rotate(mvMatrix, -degToRad(turn), [0, 1, 0]);
@@ -1200,6 +1202,7 @@
     var interactive_x = 0;
     var interactive_y = 0;
     var interactive_z = 0;
+    var interactive_size = 1;
     function tick() {
         requestAnimFrame(tick);
         handleKeys();
@@ -1280,6 +1283,18 @@
                 interactive_z += 1;
             }
         }
+        if (currentlyPressedKeys[49]) {
+            // PageUp cursor key
+            if (document.getElementById("interactive").checked) {
+                interactive_size += 0.1;
+            }
+        }
+        if (currentlyPressedKeys[50]) {
+            // PageDown cursor key
+            if (document.getElementById("interactive").checked) {
+                interactive_size -= 0.1;
+            }
+        }
     }
 
     function onCheck() {
@@ -1317,7 +1332,7 @@
     </div>
     <div>
         <h2>Interactive Teapot</h2>
-        <input type="checkbox" id="interactive" checked onchange="onCheck();" />
+        <input type="checkbox" id="interactive" onchange="onCheck();" />
 
         <h2>Light_1:</h2>
 
